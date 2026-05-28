@@ -1,5 +1,5 @@
 import { AntDesign } from "@expo/vector-icons";
-import { Stack } from "expo-router";
+import { type Href, router, Stack } from "expo-router";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -79,6 +79,7 @@ export default function OnboardingScreen() {
 
             <TouchableOpacity
               activeOpacity={0.9}
+              onPress={() => router.push("/sign-up" as Href)}
               className="mt-8 h-[74px] flex-row items-center justify-center rounded-[24px] bg-[#5c43ff] px-8 shadow-soft"
             >
               <Text className="font-['Poppins-SemiBold'] text-[18px] text-white">
