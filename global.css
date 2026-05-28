@@ -1,0 +1,38 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+@layer base {
+  :root {
+    color-scheme: light;
+    font-family: "Poppins", system-ui, sans-serif;
+    background-color: #ffffff;
+    color: #0d132b;
+  }
+
+  html,
+  body {
+    margin: 0;
+    min-height: 100%;
+    background: #ffffff;
+    color: #0d132b;
+    font-family: "Poppins", system-ui, sans-serif;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0px 16px 40px rgba(13, 19, 43, 0.08);
+  }
+
+  .shadow-card {
+    box-shadow: 0px 8px 24px rgba(13, 19, 43, 0.08);
+  }
+}
