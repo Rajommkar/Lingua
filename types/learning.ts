@@ -1,5 +1,5 @@
 /** Stable language codes used across the app and content files. */
-export type LanguageCode = "es" | "fr" | "ja";
+export type LanguageCode = "de" | "es" | "fr" | "ja";
 
 export type DifficultyLevel = "beginner" | "intermediate" | "advanced";
 
@@ -20,6 +20,8 @@ export type Language = {
   /** Short label for UI chips, e.g. "ES" */
   shortLabel: string;
   flagEmoji: string;
+  /** Display label for popularity, e.g. "28.4M learners" */
+  learnerCountLabel: string;
   description: string;
   difficultyLevels: DifficultyLevel[];
   isAvailable: boolean;

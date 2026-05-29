@@ -1,9 +1,11 @@
 import { AntDesign } from "@expo/vector-icons";
-import { type Href, router, Stack } from "expo-router";
+import { useAuth } from "@clerk/expo";
+import { type Href, Redirect, router, Stack } from "expo-router";
 import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { images } from "@/constants/images";
+import { useLanguageStore } from "@/store/language-store";
 
 const bubbles = [
   {
@@ -27,6 +29,28 @@ const bubbles = [
 ];
 
 export default function OnboardingScreen() {
+  const { isLoaded, isSignedIn } = useAuth();
+  const selectedLanguageCode = useLanguageStore(
+    (state) => state.selectedLanguageCode,
+  );
+  const hasHydrated = useLanguageStore((state) => state.hasHydrated);
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  if (isSignedIn) {
+    if (!hasHydrated) {
+      return null;
+    }
+
+    if (!selectedLanguageCode) {
+      return <Redirect href="/choose-language" />;
+    }
+
+    return <Redirect href="/" />;
+  }
+
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
