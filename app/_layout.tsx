@@ -1,8 +1,33 @@
+import { ClerkProvider } from "@clerk/expo";
+import { tokenCache } from "@clerk/expo/token-cache";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import { useEffect } from "react";
+import "react-native-reanimated";
 import "../global.css";
 
+import { useLanguageStore } from "@/store/language-store";
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? "";
+
+if (!publishableKey) {
+  throw new Error("Add your Clerk Publishable Key to the .env file");
+}
+
 export default function RootLayout() {
+  useEffect(() => {
+    const markHydrated = () => {
+      useLanguageStore.setState({ hasHydrated: true });
+    };
+
+    if (useLanguageStore.persist.hasHydrated()) {
+      markHydrated();
+      return;
+    }
+
+    return useLanguageStore.persist.onFinishHydration(markHydrated);
+  }, []);
+
   const [fontsLoaded] = useFonts({
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
@@ -14,5 +39,9 @@ export default function RootLayout() {
     return null;
   }
 
-  return <Stack />;
+  return (
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <Stack />
+    </ClerkProvider>
+  );
 }
