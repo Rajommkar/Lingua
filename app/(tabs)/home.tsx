@@ -1,4 +1,4 @@
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import { useUser } from "@clerk/expo";
 import { Href, router } from "expo-router";
 import { useState } from "react";
@@ -250,7 +250,7 @@ export default function HomeScreen() {
           {/* Today's Plan Header */}
           <View className="flex-row items-center justify-between px-6 mt-8">
             <Text className="font-['Poppins-SemiBold'] text-[20px] tracking-[-0.4px] text-[#0d1642]">
-              Today's plan
+              Today&apos;s plan
             </Text>
             <TouchableOpacity activeOpacity={0.7}>
               <Text className="font-['Poppins-SemiBold'] text-[15px] text-[#5c43ff]">
@@ -425,7 +425,7 @@ export default function HomeScreen() {
             </Text>
             
             <Text className="font-['Poppins-Medium'] text-[15px] text-[#8a92ae] text-center mt-1 px-4 leading-[22px]">
-              You completed your "{modalTitle}" activity!
+              You completed your &quot;{modalTitle}&quot; activity!
             </Text>
 
             {/* XP Award display */}
