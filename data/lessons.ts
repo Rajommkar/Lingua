@@ -1,14 +1,15 @@
 import type { LanguageCode, Lesson } from "@/types/learning";
+import { additionalLessons } from "@/data/additional-lessons";
 
-export const lessons: Lesson[] = [
-  // —— Spanish: Hello & Goodbye ——
+const baseLessons: Lesson[] = [
+  // â€”â€” Spanish: Hello & Goodbye â€”â€”
   {
     id: "es-unit-1-lesson-1",
     unitId: "es-unit-1",
     languageCode: "es",
     order: 1,
     title: "Say Hello",
-    description: "Learn hola, buenos días, and buenas noches.",
+    description: "Learn hola, buenos dÃ­as, and buenas noches.",
     difficulty: "beginner",
     xpReward: 15,
     estimatedMinutes: 5,
@@ -23,16 +24,16 @@ export const lessons: Lesson[] = [
         translation: "hello",
         pronunciationHint: "OH-lah",
         partOfSpeech: "other",
-        exampleSentence: "¡Hola! ¿Cómo estás?",
+        exampleSentence: "Â¡Hola! Â¿CÃ³mo estÃ¡s?",
         exampleTranslation: "Hello! How are you?",
       },
       {
         id: "es-buenos-dias",
-        term: "buenos días",
+        term: "buenos dÃ­as",
         translation: "good morning",
         pronunciationHint: "BWEH-nos DEE-as",
         partOfSpeech: "phrase",
-        exampleSentence: "Buenos días, Ana.",
+        exampleSentence: "Buenos dÃ­as, Ana.",
         exampleTranslation: "Good morning, Ana.",
       },
       {
@@ -46,7 +47,7 @@ export const lessons: Lesson[] = [
     phrases: [
       {
         id: "es-ph-hello-how",
-        phrase: "¡Hola! ¿Cómo estás?",
+        phrase: "Â¡Hola! Â¿CÃ³mo estÃ¡s?",
         translation: "Hello! How are you?",
         context: "Informal greeting with a friend.",
       },
@@ -68,7 +69,7 @@ export const lessons: Lesson[] = [
           },
           {
             id: "es-buenos-dias",
-            term: "buenos días",
+            term: "buenos dÃ­as",
             translation: "good morning",
             pronunciationHint: "BWEH-nos DEE-as",
             partOfSpeech: "phrase",
@@ -90,7 +91,7 @@ export const lessons: Lesson[] = [
         items: [
           {
             id: "es-ph-hello-how",
-            phrase: "¡Hola! ¿Cómo estás?",
+            phrase: "Â¡Hola! Â¿CÃ³mo estÃ¡s?",
             translation: "Hello! How are you?",
             context: "Informal greeting with a friend.",
           },
@@ -106,18 +107,18 @@ export const lessons: Lesson[] = [
           systemContext:
             "You are a warm, patient Spanish teacher for absolute beginners. Speak slowly, use simple Spanish, and encourage the learner in English when needed.",
           openingScript:
-            "¡Hola! Welcome to your first Spanish greeting lesson. Today we will practice hola, buenos días, and buenas noches together.",
+            "Â¡Hola! Welcome to your first Spanish greeting lesson. Today we will practice hola, buenos dÃ­as, and buenas noches together.",
           teachingFocus: [
             "Pronounce hola clearly",
-            "Explain when to use buenos días vs buenas noches",
+            "Explain when to use buenos dÃ­as vs buenas noches",
             "Model one short greeting exchange",
           ],
           practiceScenarios: [
-            "The learner greets you in the morning at a café.",
+            "The learner greets you in the morning at a cafÃ©.",
             "The learner says good night before leaving.",
           ],
           wrapUpScript:
-            "Great job today. Try saying buenos días to someone tomorrow morning. ¡Hasta pronto!",
+            "Great job today. Try saying buenos dÃ­as to someone tomorrow morning. Â¡Hasta pronto!",
         },
       },
     ],
@@ -128,7 +129,7 @@ export const lessons: Lesson[] = [
     languageCode: "es",
     order: 2,
     title: "Say Goodbye",
-    description: "Learn adiós and hasta luego.",
+    description: "Learn adiÃ³s and hasta luego.",
     difficulty: "beginner",
     xpReward: 15,
     estimatedMinutes: 4,
@@ -138,7 +139,7 @@ export const lessons: Lesson[] = [
     vocabulary: [
       {
         id: "es-adios",
-        term: "adiós",
+        term: "adiÃ³s",
         translation: "goodbye",
         pronunciationHint: "ah-DYOHS",
         partOfSpeech: "other",
@@ -154,7 +155,7 @@ export const lessons: Lesson[] = [
     phrases: [
       {
         id: "es-ph-see-you",
-        phrase: "¡Hasta luego! Que tengas un buen día.",
+        phrase: "Â¡Hasta luego! Que tengas un buen dÃ­a.",
         translation: "See you later! Have a good day.",
       },
     ],
@@ -167,7 +168,7 @@ export const lessons: Lesson[] = [
         items: [
           {
             id: "es-adios",
-            term: "adiós",
+            term: "adiÃ³s",
             translation: "goodbye",
             pronunciationHint: "ah-DYOHS",
           },
@@ -199,13 +200,13 @@ export const lessons: Lesson[] = [
     ],
   },
 
-  // —— Spanish: Nice to Meet You ——
+  // â€”â€” Spanish: Nice to Meet You â€”â€”
   {
     id: "es-unit-2-lesson-1",
     unitId: "es-unit-2",
     languageCode: "es",
     order: 1,
-    title: "My Name Is…",
+    title: "My Name Isâ€¦",
     description: "Introduce yourself with me llamo and mucho gusto.",
     difficulty: "beginner",
     xpReward: 20,
@@ -275,13 +276,13 @@ export const lessons: Lesson[] = [
         type: "chat-tutor",
         title: "Chat practice",
         order: 3,
-        starterMessage: "¡Hola! ¿Cómo te llamas? Responde en español.",
+        starterMessage: "Â¡Hola! Â¿CÃ³mo te llamas? Responde en espaÃ±ol.",
         suggestedTopics: ["your name", "where you are from", "saying mucho gusto"],
       },
     ],
   },
 
-  // —— French: Bonjour! ——
+  // â€”â€” French: Bonjour! â€”â€”
   {
     id: "fr-unit-1-lesson-1",
     unitId: "fr-unit-1",
@@ -321,7 +322,7 @@ export const lessons: Lesson[] = [
     phrases: [
       {
         id: "fr-ph-bonjour-comment",
-        phrase: "Bonjour ! Comment ça va ?",
+        phrase: "Bonjour ! Comment Ã§a va ?",
         translation: "Hello! How are you?",
         context: "Friendly, everyday French.",
       },
@@ -375,47 +376,47 @@ export const lessons: Lesson[] = [
             "The learner leaves a friend's apartment in the evening.",
           ],
           wrapUpScript:
-            "Très bien ! Practice saying bonjour when you start your day. Au revoir !",
+            "TrÃ¨s bien ! Practice saying bonjour when you start your day. Au revoir !",
         },
       },
     ],
   },
 
-  // —— Japanese: First Words ——
+  // â€”â€” Japanese: First Words â€”â€”
   {
     id: "ja-unit-1-lesson-1",
     unitId: "ja-unit-1",
     languageCode: "ja",
     order: 1,
     title: "Polite Hellos",
-    description: "Learn こんにちは, おはよう, and ありがとう.",
+    description: "Learn ã“ã‚“ã«ã¡ã¯, ãŠã¯ã‚ˆã†, and ã‚ã‚ŠãŒã¨ã†.",
     difficulty: "beginner",
     xpReward: 15,
     estimatedMinutes: 6,
     goals: [
       { id: "ja-u1-l1-g1", description: "Recognize basic polite Japanese greetings." },
-      { id: "ja-u1-l1-g2", description: "Say thank you with ありがとう." },
+      { id: "ja-u1-l1-g2", description: "Say thank you with ã‚ã‚ŠãŒã¨ã†." },
     ],
     vocabulary: [
       {
         id: "ja-konnichiwa",
-        term: "こんにちは",
+        term: "ã“ã‚“ã«ã¡ã¯",
         translation: "hello (daytime)",
         pronunciationHint: "kon-nee-chee-wah",
         partOfSpeech: "other",
       },
       {
         id: "ja-ohayou",
-        term: "おはよう",
+        term: "ãŠã¯ã‚ˆã†",
         translation: "good morning (casual)",
         pronunciationHint: "oh-hah-yoh",
         partOfSpeech: "other",
-        exampleSentence: "おはよう！",
+        exampleSentence: "ãŠã¯ã‚ˆã†ï¼",
         exampleTranslation: "Good morning!",
       },
       {
         id: "ja-arigatou",
-        term: "ありがとう",
+        term: "ã‚ã‚ŠãŒã¨ã†",
         translation: "thank you",
         pronunciationHint: "ah-ree-gah-toh",
         partOfSpeech: "other",
@@ -424,9 +425,9 @@ export const lessons: Lesson[] = [
     phrases: [
       {
         id: "ja-ph-thanks",
-        phrase: "ありがとうございます。",
+        phrase: "ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚",
         translation: "Thank you very much.",
-        context: "Polite form — use with strangers or in formal settings.",
+        context: "Polite form â€” use with strangers or in formal settings.",
         pronunciationHint: "ah-ree-gah-toh go-zah-ee-mahs",
       },
     ],
@@ -439,19 +440,19 @@ export const lessons: Lesson[] = [
         items: [
           {
             id: "ja-konnichiwa",
-            term: "こんにちは",
+            term: "ã“ã‚“ã«ã¡ã¯",
             translation: "hello (daytime)",
             pronunciationHint: "kon-nee-chee-wah",
           },
           {
             id: "ja-ohayou",
-            term: "おはよう",
+            term: "ãŠã¯ã‚ˆã†",
             translation: "good morning (casual)",
             pronunciationHint: "oh-hah-yoh",
           },
           {
             id: "ja-arigatou",
-            term: "ありがとう",
+            term: "ã‚ã‚ŠãŒã¨ã†",
             translation: "thank you",
             pronunciationHint: "ah-ree-gah-toh",
           },
@@ -465,9 +466,9 @@ export const lessons: Lesson[] = [
         items: [
           {
             id: "ja-ph-thanks",
-            phrase: "ありがとうございます。",
+            phrase: "ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™ã€‚",
             translation: "Thank you very much.",
-            context: "Polite form — use with strangers or in formal settings.",
+            context: "Polite form â€” use with strangers or in formal settings.",
             pronunciationHint: "ah-ree-gah-toh go-zah-ee-mahs",
           },
         ],
@@ -482,23 +483,25 @@ export const lessons: Lesson[] = [
           systemContext:
             "You are a calm Japanese teacher for beginners. Introduce hiragana gently, speak slowly, and explain cultural context briefly in English.",
           openingScript:
-            "こんにちは！Welcome. Today we will practice konnichiwa, ohayou, and arigatou.",
+            "ã“ã‚“ã«ã¡ã¯ï¼Welcome. Today we will practice konnichiwa, ohayou, and arigatou.",
           teachingFocus: [
-            "Pronounce こんにちは and when to use it",
-            "Explain casual おはよう vs more polite morning greetings",
-            "Practice ありがとう and ありがとうございます",
+            "Pronounce ã“ã‚“ã«ã¡ã¯ and when to use it",
+            "Explain casual ãŠã¯ã‚ˆã† vs more polite morning greetings",
+            "Practice ã‚ã‚ŠãŒã¨ã† and ã‚ã‚ŠãŒã¨ã†ã”ã–ã„ã¾ã™",
           ],
           practiceScenarios: [
             "The learner thanks you after receiving help.",
             "The learner greets you in the afternoon.",
           ],
           wrapUpScript:
-            "よくできました！Well done. Try using arigatou once today. またね！",
+            "ã‚ˆãã§ãã¾ã—ãŸï¼Well done. Try using arigatou once today. ã¾ãŸã­ï¼",
         },
       },
     ],
   },
 ];
+
+export const lessons: Lesson[] = [...baseLessons, ...additionalLessons];
 
 export function getLessonsByUnit(unitId: string): Lesson[] {
   return lessons
@@ -515,3 +518,5 @@ export function getLessonsByLanguage(code: LanguageCode): Lesson[] {
 export function getLessonById(id: string): Lesson | undefined {
   return lessons.find((lesson) => lesson.id === id);
 }
+
+

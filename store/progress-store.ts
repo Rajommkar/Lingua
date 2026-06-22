@@ -5,6 +5,8 @@ import { zustandStorage } from "@/lib/storage";
 
 type ProgressState = {
   xp: number;
+  dailyXp: number;
+  lastActiveDate: string;
   dailyGoal: number;
   streak: number;
   completedLessons: string[];
@@ -20,11 +22,22 @@ export const useProgressStore = create<ProgressState>()(
   persist(
     (set) => ({
       xp: 15,
+      dailyXp: 0,
+      lastActiveDate: new Date().toDateString(),
       dailyGoal: 20,
       streak: 12,
-      completedLessons: [],
-      completedTodayPlanItems: ["lesson"], // "lesson" checked by default as in screenshot
-      addXp: (amount) => set((state) => ({ xp: state.xp + amount })),
+      completedLessons: ["es-unit-3-lesson-1", "es-unit-3-lesson-2"],
+      completedTodayPlanItems: [],
+      addXp: (amount) =>
+        set((state) => {
+          const today = new Date().toDateString();
+          const isNewDay = state.lastActiveDate !== today;
+          return {
+            xp: state.xp + amount,
+            dailyXp: (isNewDay ? 0 : state.dailyXp || 0) + amount,
+            lastActiveDate: today,
+          };
+        }),
       completeLesson: (lessonId) =>
         set((state) => ({
           completedLessons: state.completedLessons.includes(lessonId)
@@ -33,7 +46,9 @@ export const useProgressStore = create<ProgressState>()(
         })),
       toggleTodayPlanItem: (itemId) =>
         set((state) => ({
-          completedTodayPlanItems: state.completedTodayPlanItems.includes(itemId)
+          completedTodayPlanItems: state.completedTodayPlanItems.includes(
+            itemId,
+          )
             ? state.completedTodayPlanItems.filter((id) => id !== itemId)
             : [...state.completedTodayPlanItems, itemId],
         })),

@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import type { BottomTabBarProps } from "expo-router/js-tabs";
 import { useCallback, useEffect, useRef } from "react";
 import { Pressable, Text, View } from "react-native";
 import Animated, {
@@ -83,6 +83,7 @@ export function CustomTabBar({ state, descriptors, navigation }: BottomTabBarPro
       const targetX = layout.x + layout.width / 2 - CIRCLE_SIZE / 2;
 
       if (animated && isInitialized.current) {
+        // eslint-disable-next-line react-hooks/immutability
         indicatorX.value = withSpring(targetX, SPRING_CONFIG);
       } else {
         indicatorX.value = targetX;
