@@ -3,20 +3,8 @@ import { Stack, router } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { getLessonImageConfig } from "@/constants/images";
-import { getLessonsByLanguage } from "@/data/lessons";
-import { useLanguageStore } from "@/store/language-store";
-import { useProgressStore } from "@/store/progress-store";
-
+import { images } from "@/constants/images";
 export default function AiTeacherScreen() {
-  const selectedLanguageCode = useLanguageStore((state) => state.selectedLanguageCode);
-  const completedLessons = useProgressStore((state) => state.completedLessons);
-
-  const languageCode = selectedLanguageCode ?? "es";
-  const lessons = getLessonsByLanguage(languageCode);
-  const currentLesson = lessons.find((lesson) => !completedLessons.includes(lesson.id)) || lessons[0];
-
-  const imageConfig = getLessonImageConfig(currentLesson.id);
 
   return (
     <>
@@ -68,7 +56,7 @@ export default function AiTeacherScreen() {
             {/* Mascot */}
             <View className="flex-1 items-center justify-center pt-8">
               <Image 
-                source={imageConfig.source}
+                source={images.mascotWelcome}
                 style={{ width: "90%", height: "90%" }}
                 resizeMode="contain"
               />

@@ -3,7 +3,7 @@ import { Stack, router, useLocalSearchParams } from "expo-router";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { getLessonImageConfig } from "@/constants/images";
+import { images } from "@/constants/images";
 import { getLessonById } from "@/data/lessons";
 
 export default function AudioLessonScreen() {
@@ -15,8 +15,6 @@ export default function AudioLessonScreen() {
   if (!lesson) {
     return null;
   }
-
-  const imageConfig = getLessonImageConfig(lesson.id);
 
   return (
     <>
@@ -68,7 +66,7 @@ export default function AudioLessonScreen() {
             {/* Mascot */}
             <View className="flex-1 items-center justify-center pt-8">
               <Image 
-                source={imageConfig.source}
+                source={images.mascotWelcome}
                 style={{ width: "90%", height: "90%" }}
                 resizeMode="contain"
               />
