@@ -1,7 +1,8 @@
 import type { LanguageCode, Unit } from "@/types/learning";
+import { additionalUnits } from "@/data/additional-units";
 
-export const units: Unit[] = [
-  // Spanish — beginner
+const baseUnits: Unit[] = [
+  // Spanish â€” beginner
   {
     id: "es-unit-1",
     languageCode: "es",
@@ -20,7 +21,7 @@ export const units: Unit[] = [
     difficulty: "beginner",
     xpReward: 50,
   },
-  // French — beginner
+  // French â€” beginner
   {
     id: "fr-unit-1",
     languageCode: "fr",
@@ -30,7 +31,7 @@ export const units: Unit[] = [
     difficulty: "beginner",
     xpReward: 50,
   },
-  // Japanese — beginner
+  // Japanese â€” beginner
   {
     id: "ja-unit-1",
     languageCode: "ja",
@@ -42,6 +43,8 @@ export const units: Unit[] = [
   },
 ];
 
+export const units: Unit[] = [...baseUnits, ...additionalUnits];
+
 export function getUnitsByLanguage(code: LanguageCode): Unit[] {
   return units
     .filter((unit) => unit.languageCode === code)
@@ -51,3 +54,5 @@ export function getUnitsByLanguage(code: LanguageCode): Unit[] {
 export function getUnitById(id: string): Unit | undefined {
   return units.find((unit) => unit.id === id);
 }
+
+

@@ -210,6 +210,7 @@ export function AuthScreen({ mode }: AuthScreenProps) {
 
     sessionRecoveryAttempted.current = true;
     void continueToApp();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthLoaded, isSignedIn, showContinueToApp]);
 
   function openVerification() {
