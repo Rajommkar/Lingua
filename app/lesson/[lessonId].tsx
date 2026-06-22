@@ -1,19 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Stack, router, useLocalSearchParams } from "expo-router";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { getLessonImageConfig } from "@/constants/images";
-import { getLanguageByCode } from "@/data/languages";
 import { getLessonById } from "@/data/lessons";
-import { getUnitById } from "@/data/units";
-import { useProgressStore } from "@/store/progress-store";
 
-export default function LessonDetailScreen() {
+export default function AudioLessonScreen() {
   const { lessonId } = useLocalSearchParams<{ lessonId: string }>();
-  const completeLesson = useProgressStore((state) => state.completeLesson);
-  const completedLessons = useProgressStore((state) => state.completedLessons);
-  const addXp = useProgressStore((state) => state.addXp);
+  const insets = useSafeAreaInsets();
 
   const lesson = lessonId ? getLessonById(lessonId) : undefined;
 
@@ -21,135 +16,176 @@ export default function LessonDetailScreen() {
     return null;
   }
 
-  const language = getLanguageByCode(lesson.languageCode);
   const imageConfig = getLessonImageConfig(lesson.id);
-  const unit = getUnitById(lesson.unitId);
-  const isCompleted = completedLessons.includes(lesson.id);
 
   return (
     <>
       <Stack.Screen options={{ headerShown: false }} />
-
-      <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 28 }}
-        >
-          <View className="px-5 pt-3">
-            <View className="flex-row items-center justify-between">
-              <TouchableOpacity
-                activeOpacity={0.85}
-                onPress={() => router.back()}
-                className="h-12 w-12 items-center justify-center rounded-full bg-[#f6f7fb]"
-              >
-                <Ionicons name="chevron-back" size={24} color="#0d1642" />
-              </TouchableOpacity>
-
-              <View className="rounded-full bg-[#f6f7fb] px-4 py-2">
-                <Text className="font-['Poppins-SemiBold'] text-[13px] text-[#5c43ff]">
-                  {language?.name ?? "Lesson"}
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }} edges={["top"]}>
+        {/* Header */}
+        <View className="flex-row items-center justify-between px-4 py-3 bg-white">
+          <View className="flex-row items-center gap-4">
+            <TouchableOpacity onPress={() => router.back()} activeOpacity={0.8}>
+              <Ionicons name="chevron-back" size={28} color="#0d1642" />
+            </TouchableOpacity>
+            
+            <View>
+              <Text className="font-['Poppins-Bold'] text-[18px] text-[#0d1642] leading-[24px]">
+                AI Teacher
+              </Text>
+              <View className="flex-row items-center gap-1.5 mt-0.5">
+                <View className="h-2.5 w-2.5 rounded-full bg-[#21c16b]" />
+                <Text className="font-['Poppins-Medium'] text-[13px] text-[#8a92ae]">
+                  Online
                 </Text>
               </View>
             </View>
+          </View>
 
-            <View className="mt-5 overflow-hidden rounded-[32px] bg-[#f6f7fb]">
-              <Image
+          <View className="flex-row items-center gap-2">
+            <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full border border-[#eef0f5] bg-white">
+              <Ionicons name="videocam-outline" size={20} color="#0d1642" />
+            </TouchableOpacity>
+            <View className="h-10 w-10 items-center justify-center rounded-full border border-[#eef0f5] bg-white">
+              <Text className="font-['Poppins-SemiBold'] text-[14px] text-[#0d1642]">12</Text>
+            </View>
+            <TouchableOpacity className="h-10 w-10 items-center justify-center rounded-full border border-[#eef0f5] bg-white">
+              <Ionicons name="notifications-outline" size={20} color="#0d1642" />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View className="flex-1" style={{ backgroundColor: "#fafafc" }}>
+          {/* Main Visual Area */}
+          <View className="flex-1 overflow-hidden rounded-[32px] mx-4 mt-4 mb-4 shadow-sm relative" style={{ backgroundColor: "#e2e0dd" }}>
+            {/* Background Room */}
+            <Image 
+              source={{ uri: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?q=80&w=800&auto=format&fit=crop" }}
+              className="absolute inset-0 w-full h-full opacity-60"
+              blurRadius={3}
+            />
+
+            {/* Mascot */}
+            <View className="flex-1 items-center justify-center pt-8">
+              <Image 
                 source={imageConfig.source}
-                resizeMode="cover"
-                style={{ width: "100%", height: 240 }}
+                style={{ width: "90%", height: "90%" }}
+                resizeMode="contain"
               />
             </View>
 
-            <Text className="mt-5 font-['Poppins-Medium'] text-[13px] uppercase tracking-[0.8px] text-[#8a92ae]">
-              Unit {unit?.order ?? 1} â€¢ Lesson {lesson.order}
-            </Text>
-            <Text className="mt-2 font-['Poppins-Bold'] text-[30px] leading-[36px] text-[#0d1642]">
-              {lesson.title}
-            </Text>
-            <Text className="mt-2 font-['Poppins-Regular'] text-[15px] leading-[24px] text-[#6f7897]">
-              {lesson.description}
-            </Text>
-
-            <View className="mt-5 flex-row gap-3">
-              <View className="flex-1 rounded-[24px] bg-[#fff4e8] px-4 py-4">
-                <Text className="font-['Poppins-Medium'] text-[13px] text-[#ff8a00]">
-                  Reward
-                </Text>
-                <Text className="mt-1 font-['Poppins-Bold'] text-[22px] text-[#0d1642]">
-                  +{lesson.xpReward} XP
-                </Text>
-              </View>
-              <View className="flex-1 rounded-[24px] bg-[#f0ecff] px-4 py-4">
-                <Text className="font-['Poppins-Medium'] text-[13px] text-[#5c43ff]">
-                  Time
-                </Text>
-                <Text className="mt-1 font-['Poppins-Bold'] text-[22px] text-[#0d1642]">
-                  {lesson.estimatedMinutes} min
-                </Text>
-              </View>
+            {/* User Video Preview */}
+            <View className="absolute top-4 right-4 h-[120px] w-[90px] rounded-[16px] border-2 border-white overflow-hidden shadow-sm bg-[#eef0f5]">
+              <Image 
+                source={{ uri: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop" }}
+                className="w-full h-full"
+                resizeMode="cover"
+              />
             </View>
 
-            <View className="mt-6 rounded-[28px] bg-[#f8f9fe] p-5">
-              <Text className="font-['Poppins-Bold'] text-[20px] text-[#0d1642]">
-                What you will practice
-              </Text>
-              <View className="mt-4 gap-3">
-                {lesson.goals.map((goal) => (
-                  <View key={goal.id} className="flex-row items-start gap-3">
-                    <View className="mt-0.5 h-6 w-6 items-center justify-center rounded-full bg-[#dff5e7]">
-                      <Ionicons name="checkmark" size={14} color="#21c16b" />
-                    </View>
-                    <Text className="flex-1 font-['Poppins-Regular'] text-[14px] leading-[22px] text-[#6f7897]">
-                      {goal.description}
+            {/* Speech Bubble */}
+            <View className="absolute bottom-8 left-0 right-0 items-center px-4">
+              <View className="bg-white rounded-[24px] p-5 shadow-sm rounded-br-none relative w-[95%]">
+                <View className="flex-row items-center justify-between">
+                  <View>
+                    <Text className="font-['Poppins-SemiBold'] text-[16px] text-[#0d1642]">
+                      ¡Muy bien!
+                    </Text>
+                    <Text className="font-['Poppins-Medium'] text-[15px] text-[#6f7897] mt-1">
+                      That was great! 👏
                     </Text>
                   </View>
-                ))}
+                  <Ionicons name="volume-high" size={24} color="#5c43ff" />
+                </View>
+                {/* Speech Bubble Tail */}
+                <View className="absolute -bottom-3 right-8 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[14px] border-l-transparent border-r-transparent border-t-white" />
               </View>
             </View>
-
-            <View className="mt-6 rounded-[28px] border border-[#eef0f5] p-5">
-              <Text className="font-['Poppins-Bold'] text-[20px] text-[#0d1642]">
-                Lesson snapshot
-              </Text>
-              <View className="mt-4 flex-row justify-between gap-3">
-                <View className="flex-1 rounded-[20px] bg-[#f6f7fb] px-4 py-4">
-                  <Text className="font-['Poppins-Medium'] text-[13px] text-[#8a92ae]">
-                    Vocabulary
-                  </Text>
-                  <Text className="mt-1 font-['Poppins-Bold'] text-[22px] text-[#0d1642]">
-                    {lesson.vocabulary.length}
-                  </Text>
-                </View>
-                <View className="flex-1 rounded-[20px] bg-[#f6f7fb] px-4 py-4">
-                  <Text className="font-['Poppins-Medium'] text-[13px] text-[#8a92ae]">
-                    Activities
-                  </Text>
-                  <Text className="mt-1 font-['Poppins-Bold'] text-[22px] text-[#0d1642]">
-                    {lesson.activities.length}
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            <TouchableOpacity
-              onPress={() => {
-                if (!isCompleted) {
-                  addXp(lesson.xpReward);
-                }
-                completeLesson(lesson.id);
-              }}
-              className={`mt-6 rounded-[24px] px-5 py-4 ${
-                isCompleted ? "bg-[#21c16b]" : "bg-[#5c43ff]"
-              }`}
-            >
-              <Text className="text-center font-['Poppins-SemiBold'] text-[16px] text-white">
-                {isCompleted ? "Lesson completed" : "Mark lesson complete"}
-              </Text>
-            </TouchableOpacity>
           </View>
-        </ScrollView>
+
+          {/* Controls Row */}
+          <View className="flex-row justify-center gap-5 mb-6 px-4">
+            <View className="items-center w-[75px]">
+              <TouchableOpacity className="h-[60px] w-[60px] items-center justify-center rounded-full bg-white shadow-sm">
+                <Ionicons name="videocam" size={24} color="#0d1642" />
+              </TouchableOpacity>
+              <Text className="mt-2 font-['Poppins-Medium'] text-[12px] text-[#8a92ae]">Camera</Text>
+            </View>
+
+            <View className="items-center w-[75px]">
+              <TouchableOpacity className="h-[60px] w-[60px] items-center justify-center rounded-full bg-white shadow-sm">
+                <Ionicons name="mic" size={24} color="#0d1642" />
+              </TouchableOpacity>
+              <Text className="mt-2 font-['Poppins-Medium'] text-[12px] text-[#8a92ae]">Mic</Text>
+            </View>
+
+            <View className="items-center w-[75px]">
+              <TouchableOpacity className="h-[60px] w-[60px] items-center justify-center rounded-full bg-white shadow-sm">
+                <Ionicons name="language" size={24} color="#0d1642" />
+              </TouchableOpacity>
+              <Text className="mt-2 font-['Poppins-Medium'] text-[12px] text-[#8a92ae]">Subtitles</Text>
+            </View>
+
+            <View className="items-center w-[75px]">
+              <TouchableOpacity onPress={() => router.back()} className="h-[60px] w-[60px] items-center justify-center rounded-full bg-[#ff4b4b] shadow-sm">
+                <Ionicons name="call" size={24} color="white" style={{ transform: [{ rotate: '135deg' }] }} />
+              </TouchableOpacity>
+              <Text className="mt-2 font-['Poppins-Medium'] text-[12px] text-[#8a92ae]">End Call</Text>
+            </View>
+          </View>
+
+          {/* Stats Card */}
+          <View className="mx-4 mb-6 rounded-[24px] bg-white py-4 px-2 shadow-sm flex-row justify-between">
+            <View className="flex-1 items-center border-r border-[#eef0f5]">
+              <Text className="font-['Poppins-SemiBold'] text-[12px] text-[#0d1642]">Speaking</Text>
+              <Text className="mt-1 font-['Poppins-SemiBold'] text-[13px] text-[#21c16b]">Excellent</Text>
+            </View>
+            <View className="flex-1 items-center border-r border-[#eef0f5]">
+              <Text className="font-['Poppins-SemiBold'] text-[12px] text-[#0d1642]">Pronunciation</Text>
+              <Text className="mt-1 font-['Poppins-SemiBold'] text-[13px] text-[#3b82f6]">Great</Text>
+            </View>
+            <View className="flex-1 items-center">
+              <Text className="font-['Poppins-SemiBold'] text-[12px] text-[#0d1642]">Grammar</Text>
+              <Text className="mt-1 font-['Poppins-SemiBold'] text-[13px] text-[#5c43ff]">Good</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Mock Tab Bar */}
+        <View 
+          className="flex-row items-center border-t border-[#eef0f5] bg-white px-1"
+          style={{ 
+            paddingBottom: Math.max(insets.bottom - 10, 6),
+            paddingTop: 8,
+          }}
+        >
+          <View className="flex-1 items-center justify-start" style={{ minHeight: 62 }}>
+            <Ionicons name="home-outline" size={22} color="#8a92ae" />
+            <Text className="mt-1 font-['Poppins-Medium'] text-[11px] text-[#8a92ae]">Home</Text>
+          </View>
+          
+          <View className="flex-1 items-center justify-start relative" style={{ minHeight: 62 }}>
+            <View className="absolute top-0 w-[52px] h-[52px] bg-[#5c43ff] rounded-full flex items-center justify-center z-10">
+              <Ionicons name="book" size={22} color="#ffffff" />
+            </View>
+          </View>
+
+          <View className="flex-1 items-center justify-start" style={{ minHeight: 62 }}>
+            <Ionicons name="headset-outline" size={22} color="#8a92ae" />
+            <Text className="mt-1 font-['Poppins-Medium'] text-[11px] text-[#8a92ae]">AI Teacher</Text>
+          </View>
+
+          <View className="flex-1 items-center justify-start" style={{ minHeight: 62 }}>
+            <Ionicons name="chatbubble-outline" size={22} color="#8a92ae" />
+            <Text className="mt-1 font-['Poppins-Medium'] text-[11px] text-[#8a92ae]">Chat</Text>
+          </View>
+
+          <View className="flex-1 items-center justify-start" style={{ minHeight: 62 }}>
+            <Ionicons name="person-outline" size={22} color="#8a92ae" />
+            <Text className="mt-1 font-['Poppins-Medium'] text-[11px] text-[#8a92ae]">Profile</Text>
+          </View>
+        </View>
       </SafeAreaView>
     </>
   );
 }
-
