@@ -1,50 +1,83 @@
-# Welcome to your Expo app 👋
+# Lingua 🌍🦉
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Lingua is a Duolingo-inspired AI language learning mobile application built with React Native and Expo. It teaches users new languages through interactive lessons, AI-powered tutors, and gamified progress tracking.
 
-## Get started
+This project is built to demonstrate how to implement a modern AI-powered mobile app feature by feature.
 
-1. Install dependencies
+## Features ✨
 
+- **AI Teacher Lessons**: Video-based interactive lessons powered by Stream Vision Agents.
+- **Audio Lessons**: Practice pronunciation and listening skills.
+- **Chat-based AI Tutor**: Real-time conversation practice.
+- **Vocabulary Review**: Interactive flashcards and quizzes.
+- **Gamification**: Local XP tracking, lesson completion streaks, and playful UI.
+- **Language Selection**: Choose from multiple languages to learn.
+- **Beautiful Mobile-first UI**: Designed with modern mobile aesthetics using NativeWind.
+
+## Tech Stack 🛠️
+
+- **Framework**: [Expo](https://expo.dev/) & [React Native](https://reactnative.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Routing**: [Expo Router](https://docs.expo.dev/router/introduction/)
+- **Styling**: [NativeWind](https://www.nativewind.dev/) (Tailwind CSS)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Local Storage**: [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
+- **Authentication**: [Clerk](https://clerk.dev/)
+- **Video & Real-time**: [Stream](https://getstream.io/) / GetStream
+- **AI Integration**: Stream Vision Agents
+
+## Getting Started 🚀
+
+### Prerequisites
+
+- Node.js (v18 or newer recommended)
+- npm or yarn
+- Expo Go app on your physical device, or an iOS Simulator / Android Emulator.
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd lingua
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Set up Environment Variables**
+   Create a `.env` file in the root directory and add the required keys:
+   ```env
+   EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+   EXPO_PUBLIC_POSTHOG_API_KEY=your_posthog_key
+   EXPO_PUBLIC_POSTHOG_HOST=your_posthog_host
+   STREAM_API_KEY=your_stream_key
+   STREAM_API_SECRET_KEY=your_stream_secret
+   ```
 
+4. **Start the development server**
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Development Philosophy 💡
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Lingua is designed as a practical learning project. 
+- **Simplicity First**: Code is kept clean, readable, and easy to explain.
+- **Feature by Feature**: Built progressively without overengineering.
+- **Pixel-Perfect UI**: The design emphasizes a playful, polished, and friendly mobile experience.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Contributing 🤝
 
-## Get a fresh project
-
-When you're ready, run:
+Contributions are welcome! If you'd like to improve the app, please check out the issues or submit a pull request. Make sure to follow the existing coding style and run linting/typechecking before submitting:
 
 ```bash
-npm run reset-project
+npm run lint
+npm run typecheck
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## License 📄
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This project is licensed under the MIT License.
